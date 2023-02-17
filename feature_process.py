@@ -62,4 +62,5 @@ def feature_process():
                         ]).reset_index(drop=True)
     new_df.to_csv('new_data/feature_processed_data.csv', index = False)
 
+feature_process()
     
