@@ -53,3 +53,13 @@ def add_features(feats):
                 feats['last_mean_' + str(n) + '_' + feature] = \
                     feats['last_' + str(n) + '_' + feature] / feats['last_sum_' + feature]
     return feats
+
+def feature_process():
+    dfs = pd.read_csv('stock_prices.csv')
+    codes = sorted(list(dfs['SecuritiesCode'].unique()))
+    new_df = pd.concat([add_features(dfs[(dfs['SecuritiesCode'] == code)]) for code in codes
+                        if len(dfs[(dfs['SecuritiesCode'] == code)]) > 100
+                        ]).reset_index(drop=True)
+    new_df.to_csv('new_data/feature_processed_data.csv', index = False)
+
+    
